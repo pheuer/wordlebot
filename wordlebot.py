@@ -266,23 +266,23 @@ def test_wordlebot(num=300):
         # Run wordlebot
         g = WordleBot(answer=answer, autoplay=True)
         # Store the score
-        results[i] = g.score
+        results[i] = g.turn
     elapsed_time = (time.time()- t0)*1e3
     time_per_word = elapsed_time/num
         
     total_score = np.mean(results)
     
-    print(f"Total score: {total_score:.2f} ({time_per_word:.1f} ms/word)")
+    print(f"Total score: {total_score:.2f}/6 ({time_per_word:.1f} ms/word)")
     
     fig, ax = plt.subplots(figsize=(6,6))
     ax.tick_params(axis='both', labelsize=12)
     ax.set_xticks([0,1,2,3,4,5,6])
-    #ax.set_xticklabels(['L', "6/6", '5/6', '4/6', '3/6', '2/6', '1/6'])
+    ax.set_xticklabels(['L', "1/6", "2/6", "3/6", "4/6", "5/6", "6/6"])
     
     ax.hist(results, bins=np.arange(8)-0.5)
     ax.set_xlabel("Score", fontsize=16)
     ax.set_ylabel("Test words", fontsize=16)
-    ax.set_title(f"Mean score: {total_score:.2f} on {num} words\n({time_per_word:.1f} ms/word)", fontsize=16)
+    ax.set_title(f"Mean score: {total_score:.2f}/6 on {num} words\n({time_per_word:.1f} ms/word)", fontsize=16)
     
     fig.savefig('results.png', dpi=300)
     
