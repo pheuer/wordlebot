@@ -30,7 +30,7 @@ The manual loop will continue until the puzzle is solved.
 
 
 # Automatic Mode
-In automatic mode, `WordleBot` creates a Wordle puzzle from a given word and solves it automatically. This is used for benchmarking WordleBot automatically on thousands of words.
+In automatic mode, `WordleBot` creates a Wordle puzzle from a given word and solves it automatically. This is used for benchmarking `Wordlebot` automatically on hundreds of words.
 
 ```python
 g = WordleBot(answer='audio', verbose=True)
