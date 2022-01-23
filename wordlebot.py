@@ -3,12 +3,13 @@
 @author: pheuer
 """
 
+import os
 import pandas as pd
 import numpy as np
 import time
 import matplotlib.pyplot as plt
 
-def _load_wordlist(path):
+def _load_wordlist(path=os.path.join(os.getcwd(), 'wordlist', 'words.txt')):
     """
     Read in the word list from CSV
     
@@ -21,7 +22,7 @@ def _load_wordlist(path):
 class WordleBot:
     
     def __init__(self, firstword=None, answer=None, autoplay=False, verbose=None):
-        self.wordlist = _load_wordlist('words.txt')
+        self.wordlist = _load_wordlist()
         
         if firstword is None:
             self.word = 'earth'
@@ -245,7 +246,7 @@ def test_wordlebot(num=300):
     Test wordlebot on a random sample of 'num' words
     """
     # Load the wordlist
-    wordlist = _load_wordlist('words.txt')
+    wordlist = _load_wordlist()
     words = np.array(wordlist)[:,0]
     freq = np.array(wordlist)[:,1].astype('int64')
     
@@ -273,7 +274,7 @@ def test_wordlebot(num=300):
     
     print(f"Total score: {total_score:.2f} ({time_per_word:.1f} ms/word)")
     
-    fig, ax = plt.subplots(figsize=(6,4))
+    fig, ax = plt.subplots(figsize=(6,6))
     ax.tick_params(axis='both', labelsize=12)
     ax.set_xticks([0,1,2,3,4,5,6])
     #ax.set_xticklabels(['L', "6/6", '5/6', '4/6', '3/6', '2/6', '1/6'])
