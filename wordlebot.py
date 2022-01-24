@@ -21,7 +21,7 @@ def _load_wordlist(path=os.path.join(os.getcwd(), 'wordlist', 'words.txt')):
 
 class WordleBot:
     
-    def __init__(self, firstword=None, answer=None, autoplay=False, verbose=None):
+    def __init__(self, firstword=None, answer=None, verbose=None):
         self.wordlist = _load_wordlist()
         
         if firstword is None:
@@ -36,7 +36,7 @@ class WordleBot:
         self.quit = False
         self.turn = 0
         
-        if autoplay:
+        if answer is not None:
             if verbose is None:
                 self.verbose = False
             else:
@@ -241,7 +241,7 @@ class WordleBot:
         
         
 
-def test_wordlebot(num=300):
+def benchmark_wordlebot(num=300):
     """
     Test wordlebot on a random sample of 'num' words
     """
@@ -264,7 +264,7 @@ def test_wordlebot(num=300):
         if i % 50 == 0:
             print(f"Word {i}/{num}")
         # Run wordlebot
-        g = WordleBot(answer=answer, autoplay=True)
+        g = WordleBot(answer=answer)
         # Store the score
         results[i] = g.turn
     elapsed_time = (time.time()- t0)*1e3
@@ -284,11 +284,13 @@ def test_wordlebot(num=300):
     ax.set_ylabel("Test words", fontsize=16)
     ax.set_title(f"Mean score: {total_score:.2f}/6 on {num} words\n({time_per_word:.1f} ms/word)", fontsize=16)
     
-    fig.savefig('results.png', dpi=300)
+    fig.savefig('results.png', dpi=200)
     
         
 
 if __name__ == '__main__':
-    #g = WordleBot(answer='earth', autoplay=True)
+    #g = WordleBot(answer='audio', verbose=True)
+    
+    g = WordleBot()
 
-    test_wordlebot(num=500)   
+    #benchmark_wordlebot(num=500)     
